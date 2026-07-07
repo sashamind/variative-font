@@ -7,14 +7,14 @@
 <meta name="description" content="Живой тест вариативного шрифта Roboto Flex: печатай слово и крути оси." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Roboto+Flex:opsz,slnt,wght,wdth,GRAD,XOPQ,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC@8..144,-10..0,100..1000,25..151,-200..150,27..175,323..603,25..135,649..854,-305..-98,560..788,416..570,528..760&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 <header class="bar">
 <div class="brand">
 <span class="eyebrow">Variable font specimen</span>
-<span class="title">Roboto&nbsp;Flex</span>
+<span class="title" id="fonttitle">Roboto&nbsp;Flex</span>
 </div>
 <button id="theme" class="ghost" type="button" aria-label="Переключить светлую и тёмную тему">
 <span data-theme-label>Тёмная</span>
@@ -33,6 +33,12 @@
 </section>
 
 <div class="controls">
+<div class="fontrow">
+<label for="font" class="lab"><span class="name">Шрифт</span></label>
+<select id="font" class="select" aria-label="Вариативный шрифт"></select>
+<button id="addfont" class="ghost" type="button">Загрузить свой…</button>
+<input id="fontfile" type="file" accept=".ttf,.otf,font/ttf,font/otf" hidden />
+</div>
 <div class="sizerow">
 <label for="size" class="lab"><span class="name">Кегль</span></label>
 <input id="size" type="range" min="16" max="200" step="1" value="40" aria-label="Кегль" />
