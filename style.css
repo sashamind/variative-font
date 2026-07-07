@@ -103,6 +103,16 @@ body{
 }
 .axislabel--x{right:10px;top:50%;transform:translateY(-140%)}
 .axislabel--y{left:50%;bottom:10px;transform:translateX(8px)}
+
+/* Курсор-точка в тон тексту: светлая в тёмной теме */
+:root[data-theme="dark"] .stage{
+  cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ccircle cx='12' cy='12' r='9' fill='%23ECEADF'/%3E%3C/svg%3E") 12 12, crosshair;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .stage{
+    cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ccircle cx='12' cy='12' r='9' fill='%23ECEADF'/%3E%3C/svg%3E") 12 12, crosshair;
+  }
+}
 .specimen:empty::before{
   content:attr(data-placeholder);
   color:var(--ink-soft);
