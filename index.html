@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Roboto Flex — вариативный специмен</title>
+<meta name="description" content="Живой тест вариативного шрифта Roboto Flex: печатай слово и крути оси." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Roboto+Flex:opsz,slnt,wght,wdth,GRAD,XOPQ,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC@8..144,-10..0,100..1000,25..151,-200..150,27..175,323..603,25..135,649..854,-305..-98,560..788,416..570,528..760&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header class="bar">
+<div class="brand">
+<span class="eyebrow">Variable font specimen</span>
+<span class="title">Roboto&nbsp;Flex</span>
+</div>
+<button id="theme" class="ghost" type="button" aria-label="Переключить светлую и тёмную тему">
+<span data-theme-label>Тёмная</span>
+</button>
+</header>
+
+<main>
+<section class="stage" id="stage">
+<div id="specimen" class="specimen" contenteditable="true" spellcheck="false" role="textbox" aria-label="Печатай образец текста здесь" data-placeholder="Печатай сюда…">Вариативность</div>
+<span class="stagehint" id="stagehint">Двигай мышь: → толщина, ↓ ширина</span>
+</section>
+
+<div class="controls">
+<div class="sizerow">
+<label for="size" class="lab"><span class="name">Кегль</span></label>
+<input id="size" type="range" min="16" max="200" step="1" value="40" aria-label="Кегль" />
+<output id="size-out" class="val">40</output>
+</div>
+
+<div class="group">
+<h2 class="grouptitle">Основные оси</h2>
+<div id="axes-reg" class="axes"></div>
+</div>
+
+<div class="group">
+<h2 class="grouptitle">Параметрические оси</h2>
+<div id="axes-par" class="axes"></div>
+</div>
+</div>
+
+<section class="output">
+<code id="css" class="cssline"></code>
+<div class="actions">
+<button id="copy" class="btn" type="button">Скопировать CSS</button>
+<button id="random" class="ghost" type="button">Случайно</button>
+<button id="reset" class="ghost" type="button">Сбросить</button>
+</div>
+</section>
+</main>
+
+<footer class="foot">
+<span>Шрифт Roboto Flex, Google Fonts (Apache 2.0).</span>
+<span>UI — IBM Plex Mono.</span>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
