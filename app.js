@@ -38,6 +38,15 @@
     var head = document.createElement("div");
     head.className = "axishead";
 
+    var check = document.createElement("input");
+    check.type = "checkbox";
+    check.className = "axischeck";
+    check.setAttribute("aria-label", "Управлять осью «" + a.name + "» мышью");
+    check.addEventListener("change", function () {
+      onCheck(a.tag, check.checked);
+    });
+    a._check = check;
+
     var lab = document.createElement("div");
     lab.className = "lab";
     lab.innerHTML =
@@ -48,6 +57,7 @@
     val.className = "val";
     val.textContent = a.def;
 
+    head.appendChild(check);
     head.appendChild(lab);
     head.appendChild(val);
 
@@ -167,7 +177,8 @@
     if (!specimen.textContent.trim()) specimen.innerHTML = "";
   });
 
-  // Квадратная область: мышь X → толщина (wght), Y → ширина (wdth).
+  // Квадратная область: выбранные две оси управляются мышью.
+  // selected[0] → ось X (горизонталь), selected[1] → ось Y (вертикаль).
   var byTag = {};
   ALL.forEach(function (a) { byTag[a.tag] = a; });
 
@@ -180,21 +191,45 @@
   }
 
   var stage = document.getElementById("stage");
+  var xLabel = document.querySelector(".axislabel--x");
+  var yLabel = document.querySelector(".axislabel--y");
+  var selected = ["wght", "wdth"]; // ровно две активные оси
+
+  function updateSelection() {
+    ALL.forEach(function (a) {
+      a._check.checked = selected.indexOf(a.tag) !== -1;
+    });
+    xLabel.textContent = byTag[selected[0]].name + " →";
+    yLabel.textContent = byTag[selected[1]].name + " ↓";
+  }
+
+  // Ровно две активные галочки: при выборе новой снимается самая старая;
+  // снять галочку вручную нельзя (иначе осталась бы одна ось).
+  function onCheck(tag, checked) {
+    if (checked) {
+      if (selected.indexOf(tag) === -1) {
+        selected.push(tag);
+        if (selected.length > 2) selected.shift();
+      }
+    }
+    updateSelection();
+  }
+
   function track(e) {
     var r = stage.getBoundingClientRect();
     var x = (e.clientX - r.left) / r.width;   // 0..1 слева направо
     var y = (e.clientY - r.top) / r.height;   // 0..1 сверху вниз
     x = Math.min(1, Math.max(0, x));
     y = Math.min(1, Math.max(0, y));
-    var wght = byTag.wght;
-    var wdth = byTag.wdth;
-    setAxis("wght", wght.min + x * (wght.max - wght.min));
-    setAxis("wdth", wdth.min + y * (wdth.max - wdth.min));
+    var xa = byTag[selected[0]];
+    var ya = byTag[selected[1]];
+    setAxis(selected[0], xa.min + x * (xa.max - xa.min));
+    setAxis(selected[1], ya.min + y * (ya.max - ya.min));
     apply();
   }
   stage.addEventListener("mousemove", track);
-  stage.addEventListener("mouseenter", function () { stage.classList.add("tracking"); });
-  stage.addEventListener("mouseleave", function () { stage.classList.remove("tracking"); });
+
+  updateSelection();
 
   (function initSize() {
     var ds = defaultSize();

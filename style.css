@@ -126,7 +126,11 @@ body{
   gap:16px 28px;
 }
 .axis{display:flex;flex-direction:column;gap:7px}
-.axishead{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.axishead{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.axischeck{
+  flex:0 0 auto;width:14px;height:14px;margin:0;cursor:pointer;
+  accent-color:var(--accent);
+}
 .lab{display:flex;align-items:baseline;gap:8px;min-width:0}
 .lab .name{font-size:13px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .lab .tag{
