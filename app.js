@@ -27,6 +27,10 @@
   var sizeIn = document.getElementById("size");
   var sizeOut = document.getElementById("size-out");
 
+  function defaultSize() {
+    return window.matchMedia && window.matchMedia("(max-width:520px)").matches ? 26 : 40;
+  }
+
   function buildAxis(a, parent) {
     var wrap = document.createElement("div");
     wrap.className = "axis";
@@ -98,9 +102,10 @@
       a._slider.value = a.def;
       a._val.textContent = a.def;
     });
-    sizeIn.value = 40;
-    sizeOut.textContent = "40";
-    specimen.style.fontSize = "40px";
+    var ds = defaultSize();
+    sizeIn.value = ds;
+    sizeOut.textContent = String(ds);
+    specimen.style.fontSize = ds + "px";
     apply();
   });
 
@@ -191,6 +196,11 @@
   stage.addEventListener("mouseenter", function () { stage.classList.add("tracking"); });
   stage.addEventListener("mouseleave", function () { stage.classList.remove("tracking"); });
 
-  specimen.style.fontSize = "40px";
+  (function initSize() {
+    var ds = defaultSize();
+    sizeIn.value = ds;
+    sizeOut.textContent = String(ds);
+    specimen.style.fontSize = ds + "px";
+  })();
   apply();
 })();
