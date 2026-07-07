@@ -90,13 +90,19 @@ body{
   outline:none;caret-color:var(--accent);
   min-height:1.1em;
 }
-.stagehint{
-  position:absolute;left:0;right:0;bottom:12px;
-  text-align:center;pointer-events:none;
-  font-size:11px;letter-spacing:.08em;color:var(--ink-soft);
-  opacity:.7;transition:opacity .2s;
+.axesguide{
+  position:absolute;inset:0;pointer-events:none;
+  color:var(--ink-soft);
 }
-.stage.tracking .stagehint{opacity:0}
+.axisline{position:absolute;background:currentColor;opacity:.12}
+.axisline--x{left:0;right:0;top:50%;height:1px}
+.axisline--y{top:0;bottom:0;left:50%;width:1px}
+.axislabel{
+  position:absolute;font-size:10px;letter-spacing:.08em;
+  opacity:.4;white-space:nowrap;
+}
+.axislabel--x{right:10px;top:50%;transform:translateY(-140%)}
+.axislabel--y{left:50%;bottom:10px;transform:translateX(8px)}
 .specimen:empty::before{
   content:attr(data-placeholder);
   color:var(--ink-soft);
